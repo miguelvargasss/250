@@ -421,16 +421,172 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 1.5rem 2rem;
+    }
+
+    .page {
+        padding-top: 7rem;
+    }
+
+    .reason-card {
+        height: 360px;
+    }
+}
+
 @media (max-width: 768px) {
-    .main-title { font-size: 3.5rem; }
-    .reason-text { font-size: 1.5rem; }
-    .carousel-container { flex-direction: column; }
-    .nav-btn { display: none; }
-    .reason-card { padding: 2rem; height: 300px; }
-    .end-title { font-size: 2.5rem; }
-    .navbar { padding: 1rem; }
-    .nav-links { display: none; }
-    .quote-marks.left { top: -1rem; left: -1rem; font-size: 3rem; }
-    .quote-marks.right { bottom: 1rem; right: -1rem; font-size: 3rem; }
-    .blob-bg { width: 300px; height: 300px; }
+    .navbar {
+        padding: 1rem 1.25rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .page {
+        padding: 5.5rem 1rem 1.5rem;
+    }
+
+    #home {
+        background-attachment: scroll;
+    }
+
+    .main-title {
+        font-size: clamp(2.8rem, 14vw, 4rem);
+    }
+
+    .subtitle {
+        font-size: clamp(1rem, 3.5vw, 1.2rem);
+        padding: 0 0.5rem;
+    }
+
+    .cta-btn {
+        padding: 0.9rem 1.4rem;
+        letter-spacing: 1.5px;
+        font-size: 0.75rem;
+    }
+
+    .carousel-container {
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .nav-btn {
+        display: none;
+    }
+
+    .card-viewer {
+        padding: 0.5rem;
+    }
+
+    .reason-card {
+        height: min(60vh, 360px);
+        padding: clamp(1.5rem, 6vw, 2.25rem);
+    }
+
+    .reason-text {
+        font-size: clamp(1.4rem, 5.5vw, 2rem);
+    }
+
+    .dots-container {
+        max-width: 90%;
+    }
+
+    .end-title {
+        font-size: clamp(2.1rem, 8vw, 2.8rem);
+    }
+
+    .end-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .quote-marks.left {
+        top: 2rem;
+        left: 1rem;
+        font-size: 3rem;
+    }
+
+    .quote-marks.right {
+        bottom: 5rem;
+        right: 1rem;
+        font-size: 3rem;
+    }
+
+    .blob-bg {
+        width: min(80vw, 300px);
+        height: min(80vw, 300px);
+    }
+
+    .footer-note {
+        margin-top: 2rem;
+    }
+
+    .footer-icons {
+        letter-spacing: 6px;
+    }
+
+    .fixed-bottom-right {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 5rem 0.75rem 1.25rem;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .logo-icon {
+        font-size: 1.4rem;
+    }
+
+    .heart-icon {
+        font-size: 2rem;
+    }
+
+    .main-title {
+        font-size: clamp(2.4rem, 14vw, 3.5rem);
+    }
+
+    .subtitle {
+        max-width: 290px;
+    }
+
+    .reason-card {
+        height: 300px;
+        border-radius: 14px;
+    }
+
+    .reason-number {
+        margin-bottom: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .gallery-content {
+        gap: 2rem;
+    }
+
+    .quote-marks.left {
+        top: 3rem;
+        left: 0.5rem;
+    }
+
+    .quote-marks.right {
+        bottom: 6rem;
+        right: 0.5rem;
+    }
+
+    .footer-note p {
+        font-size: 1.2rem;
+    }
 }
