@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>250 Razones | Eternity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">∞</span> Para Mi Amada
+        </div>
+        <nav class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#reasons">Reasons</a>
+            <a href="#gallery">Gallery</a>
+        </nav>
+        <div class="nav-action">
+            <button class="icon-btn">♡</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page 1 -->
+        <section id="home" class="page">
+            <div class="home-content">
+                <div class="heart-icon">♥</div>
+                <h1 class="main-title"><span>250</span> Razones</h1>
+                <p class="subtitle">Un viaje a través de todo lo que me hace amarte cada día más.</p>
+                <a href="#reasons" class="cta-btn">Empezar el viaje ↓</a>
+            </div>
+            <div class="background-overlay"></div>
+        </section>
+
+        <!-- Page 2 -->
+        <section id="reasons" class="page">
+            <div class="reasons-content">
+                <h2 class="section-title">EL COMIENZO DEL INFINITO</h2>
+
+                <div class="carousel-container">
+                    <button class="nav-btn prev-btn">←</button>
+
+                    <div class="card-viewer">
+                        <div class="card-track" id="cardTrack">
+                            <!-- Cards inserted by JS -->
+                        </div>
+                    </div>
+
+                    <button class="nav-btn next-btn">→</button>
+                </div>
+
+                <div class="dots-container" id="dotsContainer">
+                    <!-- Dots inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3 -->
+        <section id="gallery" class="page">
+            <div class="gallery-content">
+                <div class="blob-bg"></div>
+                <div class="quote-marks left">"</div>
+                <div class="end-text-container">
+                    <h2 class="end-title">Y estas son solo las primeras<br><span>250</span>...</h2>
+                    <p class="end-subtitle">Porque el universo es infinito, y mi amor por ti también.</p>
+                </div>
+                <div class="quote-marks right">"</div>
+
+                <div class="footer-note">
+                    <p>Forever & Always</p>
+                    <div class="footer-icons">✨ ♡ ☆</div>
+                </div>
+            </div>
+            <button class="icon-btn fixed-bottom-right">♡</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
