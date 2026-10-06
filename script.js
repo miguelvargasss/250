@@ -25,86 +25,49 @@ const reasonsList = [
   "Por los miles de besos justo antes de un hasta luego después de un increíble día juntos.",
   "Porque podrían pasar mil años hablando contigo y te juro que seguiría siendo poco el tiempo a tu lado.",
   "Porque cada vez que tomas la iniciativa para cuidarme o consentirme, me recuerdas con hechos lo inmensamente valioso que soy.",
-  "Porque me has enseñado, con una dulzura que no conocía, que merezco ser amado de manera profunda."
+  "Porque me has enseñado, con una dulzura que no conocía, que merezco ser amado de manera profunda.",
+  "Porque me fascina descubrir nuevos pequeños hábitos tuyos que el resto del mundo ignora por completo.",
+  "Porque a tu lado no me da miedo planear el futuro.",
+  "Por esos mensajes de texto inesperados en los que me dices lo mucho que me amas.",
+  "Porque me haces sentir que, sin importar lo que venga de afuera, somos un equipo.",
+  "Porque me aceptas tal y como soy, amando mis defectos sin intentar cambiarme.",
+  "Por todas esas canciones que ahora son incapaces de sonar sin que me recuerden a ti.",
+  "Porque me encanta cuando me despiertas con un beso en la frente.",
+  "Porque nunca juzgas mis sueños, por más inalcanzables que parezcan, sino que eres la primera en impulsarlos.",
+  "Porque me siento seguro de mi mismo cuando estamos juntos.",
+  "Por el calor de tus pies fríos buscando refugiarse en los míos.",
+  "Porque amo la manera en que tus ojos se iluminan cuando me cuentas algo que te apasiona.",
+  "Porque me haces sentir que no necesito buscar más, que ya te encontré.",
+  "Porque me encanta cuando me dejas tomarte fotos a escondidas.",
+  "Porque me haces sentir que hasta mis manías más irracionales son perfectas así como son.",
+  "Porque me encanta cuando me dejas probar tu comida antes que a ti.",
+  "Por todas las noches que me quedo dormido mientras te hablo y aun así me escuchas hasta quedarte dormida tu también.",
+  "Por cómo te arreglas cuando tenemos una cita y logras dejarme sin aliento como la primera vez.",
+  "Porque sabes leerme tan bien que entiendes lo que me pasa incluso antes de que yo mismo lo diga.",
+  "Por la forma en que tomas mi mano cuando caminamos por la calle.",
+  "Porque compartimos secretos y pensamientos que jamás me atrevería a decirle en voz alta a nadie más.",
+  "Por tu manera de caminar, que reconocería desde lejos entre un millón de personas en la calle.",
+  "Por cómo me sostienes la mirada cuando lloro o estoy frustrado, ofreciéndome consuelo.",
+  "Porque amo despertar a mitad de la noche, estirar la mano y confirmar que sigues ahí durmiendo junto a mí.",
+  "Por la paciencia infinita que me tienes en esos días en los que me pongo irracionalmente terco.",
+  "Porque me encanta cuando me dejas peinarte el cabello.",
+  "Por cómo te ríes de mis chistes malos, aunque sean realmente malos.",
+  "Porque en cada aniversario, cumpleaños o fecha especial, te esmeras en hacerme sentir como el hombre más especial del universo.",
+  "Por cada \"buenos días\" que mejora mi mañana incluso antes de abrir los ojos.",
+  "Por cómo te preocupas por mi bienestar de maneras sutiles, asegurándote de que haya comido bien o descansado.",
+  "Porque haces que quiera cuidar más de mi salud y de mí mismo, solo para asegurarme de tener más años a tu lado.",
+  "Por cómo me dejas cuidarte y consentirte, sabiendo que ambos lo disfrutamos por igual.",
+  "Por la forma en que me aprietas fuerte la mano cuando cruzamos una calle concurrida.",
+  "Porque tus mensajes de \"llegué bien a casa\" son mas importantes de lo que crees.",
+  "Por cómo acaricias mi cabello suavemente cuando apoyo mi cabeza en tu regazo.",
+  "Por cómo me dejas hacerte masajitos en los pies cuando están fríos.",
+  "Por cómo me das pequeños apretones de mano para darme ánimos en situaciones sociales en las que me siento incómodo.",
+  "Por la forma en que te aferras a mí cuando pasamos por lugares concurridos, haciéndome sentir tu conexión.",
+  "Por cómo sonríes cuando canto desafinado.",
+  "Porque amarte se siente como la cosa más natural, fácil y lógica que he hecho en toda mi vida.",
+  "Por cada noche que te quedas dormida con mi cabeza en tu regazo.",
+  "Por cómo me dejas tomarte fotos cuando no estás arreglada y aun así te ves hermosa.",
+  "Por cómo te encanta consentirme con detallitos que me hacen sentir amado.",
+  "Por esos momentos en los que me abrazas tan fuerte que siento que mi corazón se acelera.",
+  "Por la forma en que tus ojos se iluminan cuando me cuentas algo que te apasiona."
 ];
-
-document.addEventListener('DOMContentLoaded', () => {
-    const cardTrack = document.getElementById('cardTrack');
-    const dotsContainer = document.getElementById('dotsContainer');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    
-    let currentIndex = 0;
-    const totalCards = reasonsList.length;
-
-    // Initialize cards and dots
-    reasonsList.forEach((reason, index) => {
-        // Create Card
-        const card = document.createElement('div');
-        card.className = 'reason-card';
-        
-        const numberStr = String(index + 1).padStart(3, '0');
-        card.innerHTML = `
-            <p class="reason-number">RAZÓN ${numberStr}</p>
-            <h3 class="reason-text">"${reason}"</h3>
-        `;
-        cardTrack.appendChild(card);
-
-        // Create Dot
-        const dot = document.createElement('div');
-        dot.className = `dot ${index === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    // Update Carousel Position
-    function updateCarousel() {
-        cardTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-        
-        // Update dots
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
-    }
-
-    function goToSlide(index) {
-        currentIndex = index;
-        updateCarousel();
-    }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalCards;
-        updateCarousel();
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-        updateCarousel();
-    }
-
-    // Event Listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-
-    // Active Navigation Link on Scroll
-    const sections = document.querySelectorAll('.page');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-});

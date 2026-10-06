@@ -1,0 +1,502 @@
+/* ══════════════════════════════════════════════════════════════
+   journey.css  —  Estilos de la página de constelaciones
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --bg:        #07080f;
+    --accent:    #f8b4b4;
+    --accent2:   #e67d8d;
+    --gold:      #ffe0a3;
+    --white:     #f5f5f7;
+    --muted:     #8a8aaa;
+    --card-bg:   rgba(14, 14, 30, 0.92);
+    --font-serif: 'Playfair Display', serif;
+    --font-sans:  'Inter', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--white);
+    overflow: hidden;
+    height: 100dvh;
+    width: 100vw;
+}
+
+/* ── HIDDEN ─────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   INTRO OVERLAY
+   ══════════════════════════════════════════════════════════════ */
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 60%, #1a0a1e 0%, #07080f 70%);
+    overflow: hidden;
+}
+
+#intro-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem;
+}
+
+/* Floating hearts */
+.intro-hearts {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.ih {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floatHeart 3s ease-in-out infinite;
+}
+.ih2 { animation-delay: 0.6s; font-size: 0.9rem; }
+.ih3 { animation-delay: 1.2s; }
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+.intro-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0;
+    animation: fadeSlideUp 0.8s 0.3s ease forwards;
+}
+
+.intro-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    opacity: 0;
+    animation: fadeSlideUp 1s 0.6s ease forwards;
+}
+
+.intro-title .accent {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.intro-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: rgba(255,255,255,0.7);
+    opacity: 0;
+    animation: fadeSlideUp 1s 1s ease forwards;
+}
+
+/* Loading bar */
+.intro-bar-wrap {
+    width: min(320px, 80vw);
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.6s 1.4s ease forwards;
+}
+
+.intro-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent), var(--gold));
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+.intro-hint {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    max-width: 300px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeSlideUp 0.6s 1.6s ease forwards;
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Intro exit */
+#intro-overlay.fade-out {
+    animation: overlayOut 0.8s ease forwards;
+}
+
+@keyframes overlayOut {
+    0%   { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.05); pointer-events: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   JOURNEY PAGE
+   ══════════════════════════════════════════════════════════════ */
+#journey-page {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+/* Sky canvas */
+#sky {
+    position: absolute;
+    inset: 0;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* Back button */
+.back-btn {
+    position: fixed;
+    top: 1.4rem;
+    left: 1.6rem;
+    z-index: 50;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 30px;
+    background: rgba(7,8,15,0.7);
+    backdrop-filter: blur(8px);
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.back-btn:hover {
+    color: var(--accent);
+    border-color: rgba(248,180,180,0.3);
+}
+
+/* ── Progress heart ─────────────────────────────────────────── */
+.progress-wrap {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.heart-progress-svg {
+    width: 52px;
+    height: 46px;
+    filter: drop-shadow(0 0 6px rgba(230,125,141,0.4));
+}
+
+.heart-outline {
+    fill: none;
+    stroke: rgba(248,180,180,0.3);
+    stroke-width: 3;
+}
+
+.progress-count {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+}
+
+/* ── Star tooltip ───────────────────────────────────────────── */
+.star-tooltip {
+    position: fixed;
+    background: rgba(14,14,30,0.9);
+    border: 1px solid rgba(248,180,180,0.25);
+    border-radius: 10px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 40;
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+}
+
+.star-tooltip.visible { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════════════
+   REASON MODAL
+   ══════════════════════════════════════════════════════════════ */
+#modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(7, 8, 15, 0.75);
+    backdrop-filter: blur(6px);
+    animation: modalBgIn 0.35s ease;
+}
+
+#modal-overlay.modal-hidden {
+    display: none;
+}
+
+@keyframes modalBgIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid rgba(248,180,180,0.2);
+    border-radius: 24px;
+    padding: clamp(2rem, 6vw, 3.5rem);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6),
+                inset 0 0 0 1px rgba(255,255,255,0.04),
+                0 0 60px rgba(230,125,141,0.08);
+    animation: cardIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Decorative blurred hearts in background of card */
+.modal-hearts-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.modal-hearts-bg::before,
+.modal-hearts-bg::after {
+    content: '♥';
+    position: absolute;
+    font-size: 10rem;
+    opacity: 0.025;
+    color: var(--accent);
+    filter: blur(2px);
+}
+
+.modal-hearts-bg::before { top: -2rem; left: -2rem; }
+.modal-hearts-bg::after  { bottom: -2rem; right: -2rem; transform: rotate(20deg); }
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10;
+}
+
+.modal-close:hover { color: var(--accent); }
+
+.modal-number {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.7; text-shadow: none; }
+    50%       { opacity: 1; text-shadow: 0 0 12px rgba(248,180,180,0.7); }
+}
+
+.modal-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+    margin: 0 auto 1.8rem;
+}
+
+.modal-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 3.5vw, 1.75rem);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--white);
+    margin-bottom: 2rem;
+}
+
+.modal-next-btn {
+    display: inline-block;
+    padding: 0.75rem 1.8rem;
+    border: 1px solid rgba(248,180,180,0.3);
+    border-radius: 30px;
+    background: rgba(248,180,180,0.06);
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-next-btn:hover {
+    background: rgba(248,180,180,0.14);
+    box-shadow: 0 0 20px rgba(248,180,180,0.2);
+    transform: translateY(-2px);
+}
+
+/* ── Heart particles (shared) ───────────────────────────────── */
+.heart-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    will-change: transform, opacity;
+    line-height: 1;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .back-btn { top: 0.8rem; left: 0.8rem; }
+    .progress-wrap { top: 0.8rem; right: 0.8rem; }
+    .heart-progress-svg { width: 42px; height: 38px; }
+    .modal-card { padding: 1.75rem 1.25rem 2rem; border-radius: 18px; }
+    .modal-next-btn { font-size: 0.72rem; padding: 0.65rem 1.4rem; }
+    .end-title { font-size: clamp(2.1rem, 8vw, 2.8rem); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   END OVERLAY
+   ══════════════════════════════════════════════════════════════ */
+#end-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(7, 8, 15, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    animation: modalBgIn 1s ease;
+}
+
+#end-overlay.end-hidden {
+    display: none;
+}
+
+.end-content {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    z-index: 2;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.blob-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(80vw, 600px);
+    height: min(80vw, 600px);
+    background: radial-gradient(circle, rgba(248,180,180,0.08) 0%, rgba(248,180,180,0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(40px);
+}
+
+.quote-marks {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: rgba(255,255,255,0.08);
+    position: absolute;
+}
+
+.quote-marks.left { top: -2rem; left: -2rem; }
+.quote-marks.right { bottom: 2rem; right: -2rem; }
+
+.end-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.end-title .accent-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.end-subtitle {
+    margin-top: 1.5rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    font-style: italic;
+}
+
+.footer-note {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-note p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+.footer-icons {
+    font-size: 1.2rem;
+    letter-spacing: 10px;
+    color: var(--accent);
+}

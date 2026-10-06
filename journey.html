@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Viaje | 250 Razones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="journey.css">
+</head>
+<body>
+
+    <!-- ── INTRO OVERLAY ─────────────────────────────────────────── -->
+    <div id="intro-overlay">
+        <canvas id="intro-particles"></canvas>
+        <div class="intro-content">
+            <div class="intro-hearts">
+                <span class="ih ih1">♥</span>
+                <span class="ih ih2">✦</span>
+                <span class="ih ih3">♥</span>
+            </div>
+            <p class="intro-label">✦ Para Mi Amada ✦</p>
+            <h1 class="intro-title">
+                <span class="word w1">Tu</span>
+                <span class="word w2">viaje</span>
+                <span class="word w3">por</span>
+                <span class="word w4">las</span>
+                <br>
+                <span class="word w5 accent">250</span>
+                <span class="word w6">razones</span>
+            </h1>
+            <p class="intro-subtitle">está comenzando...</p>
+            <div class="intro-bar-wrap">
+                <div class="intro-bar" id="introBar"></div>
+            </div>
+            <p class="intro-hint">Descubre cada estrella del universo que eres para mí</p>
+        </div>
+    </div>
+
+    <!-- ── MAIN JOURNEY PAGE ─────────────────────────────────────── -->
+    <div id="journey-page" class="hidden">
+
+        <!-- Back button -->
+        <a href="index.html" class="back-btn" id="backBtn">← Volver</a>
+
+        <!-- Progress heart -->
+        <div class="progress-wrap" id="progressWrap">
+            <svg class="heart-progress-svg" viewBox="0 0 100 90" id="heartSvg">
+                <defs>
+                    <clipPath id="heartClip">
+                        <path d="M50 85 C50 85 5 55 5 28 C5 12 17 2 30 2 C38 2 45 7 50 14 C55 7 62 2 70 2 C83 2 95 12 95 28 C95 55 50 85 50 85Z"/>
+                    </clipPath>
+                    <linearGradient id="heartGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#e67d8d"/>
+                        <stop offset="100%" style="stop-color:#f8b4b4"/>
+                    </linearGradient>
+                </defs>
+                <!-- Heart outline -->
+                <path class="heart-outline" d="M50 85 C50 85 5 55 5 28 C5 12 17 2 30 2 C38 2 45 7 50 14 C55 7 62 2 70 2 C83 2 95 12 95 28 C95 55 50 85 50 85Z"/>
+                <!-- Heart fill (clipped rect that grows from bottom) -->
+                <rect id="heartFill" x="0" y="90" width="100" height="90" fill="url(#heartGrad)" clip-path="url(#heartClip)"/>
+            </svg>
+            <span class="progress-count" id="progressCount">0 / 71</span>
+        </div>
+
+        <!-- Canvas for constellation -->
+        <canvas id="sky"></canvas>
+
+        <!-- Star tooltip (hover label) -->
+        <div class="star-tooltip" id="starTooltip"></div>
+
+        <!-- Reason modal -->
+        <div id="modal-overlay" class="modal-hidden">
+            <div class="modal-card" id="modalCard">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div class="modal-hearts-bg"></div>
+                <p class="modal-number" id="modalNumber">RAZÓN 001</p>
+                <div class="modal-divider"></div>
+                <h2 class="modal-text" id="modalText"></h2>
+                <button class="modal-next-btn" id="modalNextBtn">Siguiente estrella →</button>
+            </div>
+        </div>
+
+        <!-- End message overlay -->
+        <div id="end-overlay" class="end-hidden">
+            <div class="end-content">
+                <div class="blob-bg"></div>
+                <div class="quote-marks left">"</div>
+                <div class="end-text-container">
+                    <h2 class="end-title">Y estas son solo <span class="accent-text" id="endReasonCount">71</span> de las <span class="accent-text">250</span> razones...</h2>
+                    <p class="end-subtitle">que van conformando este universo de amor infinito por ti.</p>
+                </div>
+                <div class="quote-marks right">"</div>
+
+                <div class="footer-note">
+                    <p>Forever & Always</p>
+                    <div class="footer-icons">✨ ♡ ☆</div>
+                </div>
+                <button class="modal-next-btn" style="margin-top: 3rem;" onclick="document.getElementById('end-overlay').classList.add('end-hidden')">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Heart confetti container (reused) -->
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="journey.js"></script>
+</body>
+</html>
